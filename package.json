@@ -1,0 +1,11 @@
+{
+  "name": "kiut-aromas-website",
+  "version": "1.0.0",
+  "description": "KIUT AROMAS — Plataforma Premium de Velas Sostenibles",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx -y http-server -p 3000 -c-1"
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
