@@ -44,8 +44,8 @@ self.addEventListener('push', (e) => {
   e.waitUntil(
     self.registration.showNotification(data.title || 'KIUT Wellness', {
       body: data.body || '¡Tu vela necesita una recarga pronto!',
-      icon: './icons/icon-192.svg',
-      badge: './icons/icon-192.svg',
+      icon: '/icons/icon-192.svg',
+      badge: '/icons/icon-192.svg',
       tag: data.tag || 'kiut-notification',
       data: { url: data.url || './' }
     })

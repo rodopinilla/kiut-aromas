@@ -164,7 +164,15 @@ const ThemeManager = (() => {
       toggleBtn.setAttribute('aria-label', dark ? 'Modo claro' : 'Modo oscuro');
       const icon = toggleBtn.querySelector('i, svg, .theme-icon');
       if (icon) {
-        icon.className = dark ? 'theme-icon icon-sun' : 'theme-icon icon-moon';
+        try {
+          icon.setAttribute('class', dark ? 'theme-icon icon-sun' : 'theme-icon icon-moon');
+        } catch (e) {
+          try {
+            icon.className = dark ? 'theme-icon icon-sun' : 'theme-icon icon-moon';
+          } catch (err) {
+            /* ignore if cannot set class on SVG in some environments */
+          }
+        }
       }
       toggleBtn.innerHTML = dark
         ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>'
@@ -1009,7 +1017,7 @@ const ScentQuiz = (() => {
       <div class="quiz-step active">
         <p class="quiz-step-number">Paso ${currentStep + 1} de ${QUIZ_QUESTIONS.length}</p>
         <h3 class="quiz-question">${step.question}</h3>
-        ${step.subtitle ? \`<p class="quiz-step-subtitle" style="text-align:center;color:var(--text-muted);font-size:0.9rem;margin-bottom:1.5rem;">\${step.subtitle}</p>\` : ''}
+        ${step.subtitle ? `<p class="quiz-step-subtitle" style="text-align:center;color:var(--text-muted);font-size:0.9rem;margin-bottom:1.5rem;">${step.subtitle}</p>` : ''}
         <div class="quiz-options">
           ${step.options.map((opt, i) => `
             <button class="quiz-option${answers[currentStep] === opt ? ' selected' : ''}"
@@ -1105,7 +1113,7 @@ const ScentQuiz = (() => {
     const shareBtn = stepsContainer.querySelector('.quiz-share');
     if (shareBtn) {
       shareBtn.addEventListener('click', () => {
-        const text = \`¡Descubrí mi ADN Olfativo en KIUT AROMAS! Soy \${family.name} \${family.icon}. Descubrí el tuyo →\`;
+        const text = `¡Descubrí mi ADN Olfativo en KIUT AROMAS! Soy ${family.name} ${family.icon}. Descubrí el tuyo →`;
         if (navigator.share) {
           navigator.share({ title: 'KIUT AROMAS — Mi ADN Olfativo', text, url: location.href });
         } else {
@@ -2272,7 +2280,7 @@ const ARTICLES = {
     tag: 'Rituales',
     title: 'El ritual de la noche perfecta',
     meta: 'Por KIUT AROMAS  ·  5 min de lectura  ·  Bienestar & Hogar',
-    image: "assets/images/journal_ritual_noche.jpg",
+    image: "assets/images/IMG_20260510_144841460_HDR_AE.jpg",
     content: `
       <p>Existe un momento preciso en el que la noche deja de ser el fin del día y se convierte en el comienzo de algo distinto: una pausa que mereces, un territorio propio donde el cuerpo afloja y la mente respira. Ese momento no ocurre por accidente. Se construye.</p>
 
@@ -2295,7 +2303,7 @@ const ARTICLES = {
     tag: 'Guías',
     title: 'Aromas por estación: tu guía sensorial completa',
     meta: 'Por KIUT AROMAS  ·  7 min de lectura  ·  Olfato & Naturaleza',
-    image: "assets/images/journal_aromas_estacion.jpg",
+    image: "assets/images/IMG_20260506_155709276_HDR_AE.jpg",
     content: `
       <p>La naturaleza tiene su propio lenguaje aromático. Cada estación trae consigo una paleta olfativa que resuena con algo profundo en nosotros: una memoria, una emoción, una sensación física. Aprender a leer ese lenguaje y traducirlo a tu hogar es uno de los actos más íntimos de conexión con el mundo natural.</p>
 
@@ -2320,7 +2328,7 @@ const ARTICLES = {
     tag: 'Bienestar',
     title: 'Aromaterapia en casa: la ciencia detrás del olfato',
     meta: 'Por KIUT AROMAS  ·  6 min de lectura  ·  Neurociencia & Bienestar',
-    image: "assets/images/journal_aromaterapia.jpg",
+    image: "assets/images/IMG_20260506_155540348_HDR_AE.jpg",
     content: `
       <p>Durante siglos, la humanidad utilizó el olfato como guía de supervivencia: detectar el peligro, encontrar alimento, reconocer a los suyos. Hoy, esa misma maquinaria evolutiva puede ponerse al servicio de algo completamente diferente: tu bienestar cotidiano.</p>
 
@@ -2346,7 +2354,7 @@ const ARTICLES = {
     tag: 'Sostenibilidad',
     title: 'Del campo a tu hogar: nuestra cadena sostenible',
     meta: 'Por KIUT AROMAS  ·  5 min de lectura  ·  Medio Ambiente & Economía Circular',
-    image: "assets/images/journal_sostenibilidad.jpg",
+    image: "assets/images/IMG_20260523_123404284_HDR_AE.jpg",
     content: `
       <p>Hay una pregunta que nos hicimos desde el primer día: ¿es posible crear una vela que sea honesta en cada etapa de su existencia? No solo en el momento en que arde, sino desde que sus materiales son extraídos hasta que el recipiente termina su vida útil. La respuesta, después de años de investigación y reformulaciones, es sí. Pero requiere trabajo.</p>
 
@@ -2375,56 +2383,56 @@ const ARTICLES = {
     tag: 'B2B',
     title: 'Regalos corporativos con impacto',
     meta: 'Por KIUT AROMAS  ·  3 min de lectura',
-    image: 'assets/images/journal_b2b.jpg',
+    image: 'assets/images/IMG_20260425_145751619_HDR_AE.jpg',
     content: '<p>Personalizamos aromas para empresas que buscan conectar de forma genuina.</p>'
   },
   'hotel-spas': {
     tag: 'B2B',
     title: 'Aromaterapia para Hoteles y Spas',
     meta: 'Por KIUT AROMAS  ·  4 min de lectura',
-    image: 'assets/images/journal_hotel.jpg',
+    image: 'assets/images/IMG_20260506_131253739_HDR_AE.jpg',
     content: '<p>Diseñamos fragancias exclusivas para potenciar la experiencia de tus clientes.</p>'
   },
   'design-trends': {
     tag: 'Diseño Interior',
     title: 'Tendencias en aromas y diseño',
     meta: 'Por KIUT AROMAS  ·  5 min de lectura',
-    image: 'assets/images/journal_design.jpg',
+    image: 'assets/images/IMG_20260506_102503326_HDR_AE.jpg',
     content: '<p>Cómo los aromas se integran al diseño de interiores para transformar un espacio.</p>'
   },
   'argentine-culture': {
     tag: 'Cultura Argentina',
     title: 'Aromas que cuentan nuestra historia',
     meta: 'Por KIUT AROMAS  ·  4 min de lectura',
-    image: 'assets/images/journal_culture.jpg',
+    image: 'assets/images/IMG_20260523_123656026_HDR_AE.jpg',
     content: '<p>Nuestros aromas están inspirados en los paisajes y la cultura de Argentina.</p>'
   },
   'wellness-routine': {
     tag: 'Bienestar',
     title: 'Tu rutina de bienestar diaria',
     meta: 'Por KIUT AROMAS  ·  3 min de lectura',
-    image: 'assets/images/journal_wellness.jpg',
+    image: 'assets/images/IMG_20260523_123708294_HDR_AE.jpg',
     content: '<p>Pequeños rituales con aromas que te ayudarán a mantener el equilibrio diario.</p>'
   },
   'candle-care': {
     tag: 'Guías',
     title: 'Cómo cuidar tus velas',
     meta: 'Por KIUT AROMAS  ·  2 min de lectura',
-    image: 'assets/images/journal_care.jpg',
+    image: 'assets/images/IMG_20260523_123814349_HDR_AE.jpg',
     content: '<p>Guía rápida para extender la vida útil de tus velas y mantener su calidad.</p>'
   },
   'eco-packaging': {
     tag: 'Sostenibilidad',
     title: 'Nuestro packaging ecológico',
     meta: 'Por KIUT AROMAS  ·  3 min de lectura',
-    image: 'assets/images/journal_eco.jpg',
+    image: 'assets/images/IMG_20260425_144032438_HDR_AE.jpg',
     content: '<p>El compromiso de KIUT con el medio ambiente va más allá de la cera.</p>'
   },
   'scent-pairing': {
     tag: 'Diseño Interior',
     title: 'Scent Pairing para tu hogar',
     meta: 'Por KIUT AROMAS  ·  5 min de lectura',
-    image: 'assets/images/journal_pairing.jpg',
+    image: 'assets/images/IMG_20260425_143255390_HDR_AE.jpg',
     content: '<p>Aprende a combinar diferentes aromas para crear ambientes únicos.</p>'
   }
 };
@@ -2438,7 +2446,7 @@ function openArticle(id) {
   document.getElementById('modal-tag').textContent = data.tag;
   document.getElementById('modal-title').textContent = data.title;
   document.getElementById('modal-meta').textContent = data.meta;
-  document.getElementById('modal-hero-img').style.backgroundImage = \`url('\${data.image}')\`;
+  document.getElementById('modal-hero-img').style.backgroundImage = `url('${data.image}')`;
   document.getElementById('modal-text').innerHTML = data.content;
 
   modal.classList.add('is-open');

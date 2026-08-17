@@ -1,0 +1,11 @@
+[
+  {
+    "kind": "console",
+    "type": "log",
+    "text": "%c🕯️ KIUT AROMAS %c— Encendiendo experiencias background:#C4A265;color:#fff;padding:4px 12px;border-radius:4px 0 0 4px;font-weight:700; background:#1A1A1A;color:#C4A265;padding:4px 12px;border-radius:0 4px 4px 0;"
+  },
+  {
+    "kind": "pageready",
+    "value": "complete - http://127.0.0.1:3000/"
+  }
+]

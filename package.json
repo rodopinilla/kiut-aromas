@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "npx -y http-server -p 3000 -c-1"
   },
-  "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "playwright": "^1.41.0"
+  }
 }
